@@ -1,0 +1,27 @@
+extends bootstrap-layout
+
+block content
+    form
+        fieldset
+            legend
+                |游戏说明
+            h5
+                |对于供题人
+            |   他人答对供题人的题，供题人加0分
+            br
+            |   他人答错供题人的题，供题人加1分
+
+            h5
+                |对于答题人
+            |   答题人答对他人的题，答题人加1分
+            br
+            |   答题人答错他人的题，答题人加0分
+
+
+    div.row
+        div.span4
+            a(href="/question").btn.btn-success.btn-large
+                |开始答题
+        div.span4
+            a(href="/question/create").btn.btn-info.btn-large
+                |我要出题

@@ -1,0 +1,22 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-17
+   Time: 下午5:29
+extends ./../bootstrap-layout
+
+block content
+
+    if locals.user
+        form#update_form(method='POST',action='/user/save')
+            label(for="username") Username
+            input(type="text",id="username",name="model[name]",value="#{model.name}",readonly="readonly")
+
+            label(for="organization") Orgnzation
+            input(type="text",id="organization",name="model[organization]",value="#{model.organization}",readonly="readonly")
+
+            label(for="role") Role
+            input(type="text",id="role",name="model[role]",value="#{model.role}",readonly="readonly")
+
+            br
+            //-input(type="submit",value="保存").btn.btn-large.btn-primary

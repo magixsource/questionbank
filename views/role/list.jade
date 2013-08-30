@@ -1,0 +1,22 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-16
+   Time: 下午2:26
+extends ./../bootstrap-layout
+
+block content
+
+    if locals.user
+        table.table
+            thead.thead
+                th
+                    名称
+                th
+                    操作
+            each item in roles
+                tr
+                    td
+                        a(href='#') #{item.name}
+                    td
+                        a(href="/customer/"+item._id).btn 空闲

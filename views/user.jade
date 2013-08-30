@@ -1,0 +1,22 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-16
+   Time: 下午2:01
+extends bootstrap-layout
+
+block content
+
+    if locals.user
+        form#update_form(method='POST',action='/user/save')
+            label(for="username") Username
+            input(type="text",id="username",name="who[name]",value="#{who.name}",readonly="readonly")
+
+            label(for="role") Role
+            select(id="role",name="who[role]")
+                option(value='')
+                each item in roles
+                    - var select=null; if (item.name == who.role) select='selected';
+                        option(value=item.name, selected=select)= item.name
+            br
+            input(type="submit",value="保存").btn.btn-large.btn-success

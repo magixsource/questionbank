@@ -1,0 +1,43 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-13
+   Time: 下午3:47
+
+extends bootstrap-layout
+block styles
+    style.
+        .form-signin {
+            max-width: 300px;
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            font-size: 16px;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 7px 9px;
+        }
+
+block content
+
+    if !locals.user
+        form#signin_form(method='POST',action='/signin').form-signin
+            label(for="username")
+            input(type="text",id="username",name="user[username]",placeholder='username').input-block-level
+            label(for="password")
+            input(type="password",id="password",name="user[password]",placeholder='password').input-block-level
+            input(type="submit",value="提交").btn.btn-large.btn-success

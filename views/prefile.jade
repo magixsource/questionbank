@@ -1,0 +1,19 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-23
+   Time: 下午6:20
+extends bootstrap-layout
+
+block content
+
+    form(method="POST",enctype="multipart/form-data",action="/prefile")
+        label 用户名
+            input(readonly="readonly",value="#{user.name}")
+        label 头像
+            if user.head
+                img(src="/images/head/#{user.head}",width="128",height="128")
+            br
+            input(type="file",name="user[head]")
+
+        input(type="submit",value="保存").btn.btn-success

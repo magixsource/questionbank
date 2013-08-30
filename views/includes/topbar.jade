@@ -1,0 +1,41 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-15
+   Time: 下午3:00
+
+a(href='#').brand  Makkt Question Bank
+div.nav-collapse.collapse
+    ul.nav
+        li.active
+            a(href='/') Home
+
+        li.dropdown
+            a(href='#',data-toggle="dropdown").dropdown-toggle User
+                b.caret
+            ul.dropdown-menu
+                if !locals.user
+                    li
+                        a(href='/signup') SignUp
+                    li
+                        a(href='/signin') SignIn
+                if locals.user
+                    li
+                        a(href='/prefile') #{locals.user.name}
+                    li
+                        a(href='/signout') SignOut
+
+        if locals.user
+            if locals.user.name=='admin'
+                li.dropdown
+                    a(href='#',data-toggle="dropdown").dropdown-toggle Role
+                        b.caret
+                    ul.dropdown-menu
+                        li
+                            a(href='/role/create') Create
+                        li
+                            a(href='/role/list') List
+                        li
+                            a(href='/assign') Role Assign
+        li
+            a(href='/about') About

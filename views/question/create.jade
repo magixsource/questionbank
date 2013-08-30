@@ -1,0 +1,132 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-19
+   Time: 下午8:05
+extends ../bootstrap-layout
+
+block scripts
+    script(src='/javascripts/stack.js')
+    script.
+        var stack = new Stack();
+
+        jQuery(function(){
+
+          jQuery("input[name='question[isMulti]']").change(function(){
+            if(jQuery(this).val()=='false'){
+              //-do when case radio
+              jQuery("input[name='answer[isRight]']").attr('type','radio');
+            }else{
+              //-do when case checkbox
+              jQuery("input[name='answer[isRight]']").attr('type','checkbox');
+            }
+          });
+
+          jQuery("#radio_answer_select").click();
+
+          jQuery(".answer-plus").click(function(){
+              var answerMaxium = jQuery("input[name='answer[content]']").length;
+              var nextIndex =  answerMaxium+1;
+
+              if(!stack.Empty()){
+                 nextIndex = getNextIndex();
+              }
+
+              var appendSelectType = jQuery("input[name='question[isMulti]']:checked").val()=='true'?'checkbox':'radio';
+
+              var appendHtml = '<div class="row" id="appendRow'+nextIndex+'"><div class="span4"><label><input name="answer[content]"></label></div><div class="span"><lable><input type="'
+              +appendSelectType+
+              '" name="answer[isRight]" value="'
+              +nextIndex+
+              '"></lable></div><div class="span"><a href="#" onclick="removeAppendRow('+nextIndex+')" class="btn answer-minus"><i class="icon icon-minus-sign"></i></a></div></div>';
+
+              jQuery('.append_div').append(appendHtml);
+          });
+
+
+
+        });
+
+        function removeAppendRow(index){
+            jQuery("#appendRow"+index).remove();
+            stack.Push(index);
+        }
+        function getNextIndex(){
+            return stack.Pop();
+        }
+
+block content
+
+    form(method="POST",action="/question/save",enctype="multipart/form-data").form.form-horizontal
+        fieldset
+            legend 问题基本信息
+            div.row
+                div.span
+                    label &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问题
+                div.span4
+                    input(name='question[name]',placeholder="Question content")
+            div.row
+                div.span
+                    label 是否多选
+                div.span4
+                    input#checkbox_answer_select(type="radio",name='question[isMulti]',value="true")
+                    | 是
+                    input#radio_answer_select(type="radio",name='question[isMulti]',value="false")
+                    | 否
+            div.row
+                div.span
+                    lable 图片链接
+                div.span4
+                    input(type="file",name='question[imgLink]')
+
+        fieldset
+            legend 答案项
+
+            div.row
+                div.span4
+                    h5
+                        |答案选项
+                div.span3
+                    h5
+                        |是否为正确答案
+            div.row
+                div.span4
+                    label
+                        input(name='answer[content]')
+                div.span
+                    lable
+                        input(type="checkbox",name="answer[isRight]",value="1")
+            div.row
+                div.span4
+                    label
+                        input(name='answer[content]')
+                div.span
+                    lable
+                        input(type="checkbox",name="answer[isRight]",value="2")
+            div.row
+                div.span4
+                    label
+                        input(name='answer[content]')
+                div.span
+                    lable
+                        input(type="checkbox",name="answer[isRight]",value="3")
+            div.row
+                div.span4
+                    label
+                        input(name='answer[content]')
+                div.span
+                    lable
+                        input(type="checkbox",name="answer[isRight]",value="4")
+            div.append_div
+
+            div.row
+                div.span4
+                div.span
+                    | &nbsp;&nbsp;&nbsp;
+                div.span
+                    div.btn-group
+                        a(href="#").btn.btn-inverse.answer-plus
+                            i.icon.icon-plus-sign.icon-white
+
+        br
+        input(type="submit").btn.btn-success

@@ -1,0 +1,19 @@
+//
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-14
+   Time: 下午4:11
+extends ./../bootstrap-layout
+
+block content
+
+    if locals.user
+        form#role_create_form(method='POST',action='/role/save')
+            label(for="name")
+            input(type="text",id="name",name="role[name]",value="#{role.name}",readonly="readonly")
+            label(for="parent")
+            select(id="parent",name="role[parent]",value="#{role.parent}",readonly="readonly")
+                option(value='')
+                each r in roles
+                    - var select=null; if (r._id == role.parent) select='selected';
+                        option(value=r._id, selected=select)= r.name

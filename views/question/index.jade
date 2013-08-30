@@ -1,0 +1,68 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-19
+   Time: 下午7:47
+extends ../bootstrap-layout
+
+block scripts
+//-
+    script.
+            jQuery("#next_btn").click(function(){
+                var selected = jQuery("input[name='answer[answerItemId]']:selected");
+                return false;
+            });
+
+block content
+
+    div.row
+        div.span8
+            -var item = question;
+            //each item in questions
+            if item
+                form(method="POST",action="/question/answer")
+                    input(type="hidden",name="answer[questionId]",value="#{item._id}")
+                    blockquote
+                        span
+                            i.icon-question-sign
+                            |#{item.name}
+                    br
+                    if item.imgLink
+                        img(src="/images/#{item.imgLink}",width="370")
+
+                    if item.isMulti
+                        ul
+                        each subitem in item.answers
+                            li
+                                input(type="checkbox",id="answer",name="answer",value="#subitem._id")
+                                label(for="answer") #{subitem.content}
+                    else
+                        ul.unstyled
+                            each subitem in item.answers
+                                li
+                                    label
+                                        input(type="radio",id="answer",name="answer[answerItemId]",value="#{subitem._id}")
+                                        |#{subitem.content}
+
+
+                    input#next_btn(type="submit",value="下一题").btn.btn-success
+        div.span4
+            i.icon-eye-open
+            |回答
+            span.badge
+                |#{answerTotal}
+            br
+            i.icon-thumbs-up
+            |正确
+            span.badge.badge-success
+                |#{answerRight}
+            br
+            i.icon-filter
+            |正确率
+            span.badge.badge-warning
+                |#{answerRate}%
+            br
+            i.icon-bell
+            |积分
+            span.badge.badge-important
+                |#{locals.user.point}

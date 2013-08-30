@@ -1,0 +1,30 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-12
+   Time: 3:40
+
+extends bootstrap-layout
+
+block content
+
+    form#signup_form(method='POST',action='/signup')
+
+        label(for="username") Username
+        input(type="text",id="username",name="user[username]")
+        label(for="password") Password
+        input(type="password",id="password",name="user[password]")
+        label(for="repeat-password") Repeat password
+        input(type="password",id="repeat-password",name="repeat-password")
+        //- admin and manager signup begin
+        if locals.user && (locals.user.role == 'manager' || locals.user.role == 'admin')
+            input(type="hidden",name="user[organization]",value="#{locals.user.organization}")
+            label(for="role") Role
+            select(id="role",name="user[role]")
+                option(value='')
+                each item in roles
+                    - var select=null; if (item.name == user.role) select='selected';
+                        option(value=item.name, selected=select)= item.name
+        //-admin and manager signup end
+        br
+        input(type="submit",value="提交").btn.btn-large.btn-success

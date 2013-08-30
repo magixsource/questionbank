@@ -1,0 +1,33 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-15
+   Time: PM 2:39
+!!! 5
+html
+
+    head
+        include includes/header
+        block styles
+    body
+
+        div.navbar.nav-fxied-top.navbar-inverse
+            div.navbar-inner
+                div.container
+                    include includes/topbar
+
+        div.container
+            if flash.error
+                div.alert.alert-error
+                    button(type='button',data-dismiss='alert').close  &times;
+                    p= flash.error
+            if flash.success
+                div.alert.alert-success
+                    button(type='button',data-dismiss='alert').close &times;
+                    p= flash.success
+
+            block content
+
+            footer
+                include includes/footer
+    block scripts

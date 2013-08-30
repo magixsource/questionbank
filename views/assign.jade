@@ -1,0 +1,33 @@
+//-
+   Created with JetBrains WebStorm.
+   User: linpeng
+   Date: 13-8-16
+   Time: 上午9:31
+extends bootstrap-layout
+
+block content
+
+    if locals.user
+        table.table
+            thead.thead
+                th
+                    |名称
+                th
+                    |当前角色
+                th
+                    |操作
+            each item in users
+                tr
+                    td
+                        a(href='/user/update/'+item.name) #{item.name}
+
+                    td
+                        if item.role
+                            span #{item.role}
+                        else
+                            span customer
+                    td
+                        if item.role=='manager'
+                            a(href="/customer/"+item._id).btn.btn-danger 解除
+                        else
+                            a(href="/manager/"+item._id).btn.btn-info 升级

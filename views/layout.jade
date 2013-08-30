@@ -1,0 +1,39 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+      //-
+          div#navigation
+          ul
+              li
+                  a(href='/') Index
+              li
+                  a(href='/signup') SignUp
+              li
+                  a(href='/signin') SignIn
+              if locals.user
+                li
+                    a(href='/prefile') #{locals.user.name}
+                li
+                    a(href='/signout') SignOut
+                li
+                    a(href='/role/create') Role Create
+
+    //-
+        if locals.error
+          #{locals.error}
+        if locals.success
+          #{locals.success}
+        if locals.phone
+          #{locals.phone}
+        if locals.iphone
+          #{locals.iphone}
+
+    if flash.error
+      li= flash.error
+    if flash.success
+      li= flash.success
+
+    block content
