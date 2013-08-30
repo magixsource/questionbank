@@ -1,6 +1,6 @@
 #Question Bank#
 
->  Question Bank is a nodejs application demo build by express、mongodb and template use jade as default.
+Question Bank is a nodejs application demo build by express、mongodb and template use jade as default.
    all technology use as follow:
    * express
    * mongodb
